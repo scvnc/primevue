@@ -279,6 +279,9 @@ export default {
 
         if (element) {
             let parents = this.getParents(element);
+
+            console.debug('detected parents', parents);
+
             const overflowRegex = /(auto|scroll)/;
 
             const overflowCheck = (node) => {
@@ -302,7 +305,9 @@ export default {
                     }
                 }
 
-                if (parent.nodeType !== 9 && overflowCheck(parent)) {
+                const DOCUMENT_FRAGMENT_NODE_TYPE = 11;
+
+                if (parent.nodeType !== 9 && parent.nodeType !== DOCUMENT_FRAGMENT_NODE_TYPE && overflowCheck(parent)) {
                     scrollableParents.push(parent);
                 }
             }
